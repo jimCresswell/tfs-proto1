@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Data from '../views/Data.vue'
+import Trees from '../views/Trees.vue'
 
 Vue.use(VueRouter)
 
@@ -20,9 +20,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/data',
-    name: 'Data',
-    component: Data
+    path: '/trees',
+    name: 'Trees',
+    component: Trees
   }
 ]
 
