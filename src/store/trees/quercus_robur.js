@@ -1,4 +1,4 @@
-import Tree from './tree'
+import Tree, { months, seedContainers } from './tree'
 
 export default new Tree({
   species: 'Quercus robur',
@@ -8,6 +8,8 @@ export default new Tree({
     'pedunculate oak',
     'European oak'
   ],
-  stuff: 'n things',
-  blah: 'sheep'
+  seedContainer: seedContainers.NUT,
+  collect: [months.SEPTEMBER, months.OCTOBER],
+  wikiLink: 'https://en.wikipedia.org/wiki/Quercus_robur',
+  wikiData: { fetched: false }
 })
