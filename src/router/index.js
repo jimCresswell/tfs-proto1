@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Trees from '../views/Trees.vue'
+import TreesView from '../views/TreesView.vue'
 
 Vue.use(VueRouter)
 
@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/trees',
     name: 'Trees',
-    component: Trees
+    component: TreesView
   }
 ]
 

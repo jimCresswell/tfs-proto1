@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import trees from './trees'
+import trees from '../data/trees'
 
 Vue.use(Vuex)
 
