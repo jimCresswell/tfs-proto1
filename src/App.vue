@@ -39,9 +39,10 @@
 
     <v-content>
       <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link> |
-        <router-link to="/trees">Trees</router-link>
+        |
+        <template v-for="route in mainRoutes">
+          <router-link :to="route.path" :key="route.path">{{route.name}}</router-link> |
+        </template>
       </div>
       <router-view/>
       <!-- <HelloWorld/> -->
@@ -70,6 +71,7 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld'
+import { routes } from './router'
 
 export default {
   name: 'App',
@@ -78,8 +80,15 @@ export default {
   //   HelloWorld
   // },
 
+  // Note: this is data local to the App component.
+  // The Vuex store has also been injected in `main.js` and is available to all child components.
   data: () => ({
-    //
-  })
+    routes
+  }),
+  computed: {
+    mainRoutes () {
+      return this.routes.filter((route) => route.isMainRoute)
+    }
+  }
 }
 </script>
