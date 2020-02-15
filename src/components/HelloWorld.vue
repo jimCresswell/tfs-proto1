@@ -95,7 +95,12 @@
 <script>
 export default {
   name: 'HelloWorld',
-  props: ['msg'],
+  props: {
+    msg: {
+      type: String,
+      default: 'My lovely app'
+    }
+  },
   data: () => ({
     ecosystem: [
       {
