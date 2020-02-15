@@ -8,6 +8,10 @@ const optionsSchema = {
   collect: ['', '']
 }
 
+/**
+ * @todo consider making most fields objects then calling checkOptions recursively.
+ * E.g. make collect `{start: '', fisnish ''}`.
+ */
 function checkOptions (options) {
   for (const prop in optionsSchema) {
     // Options should contain a value for each schema property.
