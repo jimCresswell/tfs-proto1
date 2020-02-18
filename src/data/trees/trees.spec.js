@@ -17,48 +17,18 @@ const goodData = {
 }
 
 describe('The Tree Class', () => {
-  describe('data validation with a schema', () => {
-    it('allows data matching the schema', () => {
-      expect(
-        () => new Tree(goodData)
-      ).not.toThrow()
-    })
+  it('can be instantiated with good data', () => {
+    expect(
+      () => new Tree(goodData)
+    ).not.toThrow()
+  })
 
-    it('allows additional properties in the data', () => {
-      const data = _cloneDeep(goodData)
-      data.anExtraProperty = 'lovely'
+  it('cannot be instantiated with bad data', () => {
+    const data = _cloneDeep(goodData)
+    delete data.species
 
-      expect(
-        () => new Tree(data)
-      ).not.toThrow()
-    })
-
-    it('throws on properties missing from the schema', () => {
-      const data = _cloneDeep(goodData)
-      delete data.species
-
-      expect(
-        () => new Tree(data)
-      ).toThrow(/Schema error: Required property (.+) is undefined/)
-    })
-
-    it('throws on properties not matching the type in the schema', () => {
-      const data = _cloneDeep(goodData)
-      data.species = ['unexpected array']
-
-      expect(
-        () => new Tree(data)
-      ).toThrow(/Schema error: Expected property (.+) to have type/)
-    })
-
-    it('accumulates errors and throws once', () => {
-      const data = _cloneDeep(goodData)
-      data.species = ['unexpected array']
-      delete data.name
-
-      expect(
-        () => new Tree(data)
-      ).toThrow(/Schema errors:\n/)
-    })
+    expect(
+      () => new Tree(data)
+    ).toThrow()
   })
 })
