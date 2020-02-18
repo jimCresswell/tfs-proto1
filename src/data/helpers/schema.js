@@ -24,18 +24,29 @@ function _checkParams (schema, data, path = '') {
   const paramErrors = []
 
   // Note the loop is over the schema, there are no constraints on data properties outside the schema.
-  for (const prop in schema) {
-    const dataValue = data[prop]
-    const schemaPropType = _getType(schema[prop])
+  for (const schemaProp in schema) {
+    const dataValue = data[schemaProp]
+    const dataPropType = _getType(dataValue)
+    const schemaValue = schema[schemaProp]
+    const schemaPropType = _getType(schemaValue)
+    const pathToProp = `${path}${schemaProp}`
 
-    // The data should contain a value for each schema property.
-    if (undefined === dataValue) {
-      paramErrors.push(`Required property '${path + prop}' is undefined.`)
-    // The data should contain a value of the correct type.
+    // Error: the data should contain a value for each schema property.
+    if (dataValue === undefined) {
+      paramErrors.push(`Required property '${pathToProp}' is undefined.`)
+
+    // Error: the data should contain a value of the correct type.
+    } else if (schemaPropType !== dataPropType) {
+      paramErrors.push(`Expected property '${pathToProp}' to have type '${schemaPropType}', received value '${data[schemaProp]}' with type '${dataPropType}'.`)
+
+    // Success.
     } else {
-      const dataPropType = _getType(data[prop])
-      if (schemaPropType !== dataPropType) {
-        paramErrors.push(`Expected property '${path + prop}' to have type '${schemaPropType}', received value '${data[prop]}' with type '${dataPropType}'.`)
+      // If the schema property is an object then recursivey check that part of the schema.
+      if (schemaPropType === 'object') {
+        const subPath = `${pathToProp}.`
+        const subErrors = _checkParams(schemaValue, dataValue, subPath)
+        // Merge any errors.
+        paramErrors.push(...subErrors)
       }
     }
   }

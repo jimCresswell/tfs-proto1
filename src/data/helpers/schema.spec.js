@@ -66,4 +66,13 @@ describe('The validateData function', () => {
       () => validateData(data, schema)
     ).toThrow(/Schema errors:\n/)
   })
+
+  it('Checks the schema recursively and includes the property path in the error message', () => {
+    const data = _cloneDeep(goodData)
+    delete data.collect.start
+
+    expect(
+      () => validateData(data, schema)
+    ).toThrow(/collect.start/)
+  })
 })
