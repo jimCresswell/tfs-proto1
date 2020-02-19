@@ -1,36 +1,27 @@
 # trees-from-seed
-A SPA (Vue) providing information on growing trees (UK/northern Europe native-ish) from seed
 
-## Project setup
-```
-yarn install
-```
+A web app providing information and guidance on growing native and naturalised trees (UK/northern Europe) from seed. The information should be applicable in any temperate zone although obviously native species will vary.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Technology
 
-### Compiles and minifies for production
-```
-yarn build
-```
+This is a [Vue](https://vuejs.org/) client-side web app, using Vuex for (flux-like) state management and Vue-Router for client-side routing. UI components are defined in single-page components with the default Vue template syntax, ES6 and SCSS. Predefined UI components are from [Vuetify](https://vuetifyjs.com). Compilation is via Vue-CLI configured Babel and Webpack.
 
-### Run your unit tests
-```
-yarn test:unit
-```
+## Scripts
 
-### Run your end-to-end tests
-Using Cypress. Note: Firefox support was added to Cypress in 4.0.0, `@vue/cli-plugin-e2e-cypress` is currently using 3.8.3 .
-```
-yarn test:e2e
-```
+* `yarn install`.
+* `yarn serve` - dev serve with hot reload.
+* `yarn build`- production compilation with minification.
+* Test
+  * `yarn test:unit` - unit tests (Jest) that don't depend on Vue.
+  * `yarn test:int` - unit-like tests (Jest) that do depend on Vue or Vue plugins.
+  * `yarn test:code` - equivalent to `unit` and `int` tests.
+  * `yarn test:e2e` - end-to-end web GUI tests using Cypress. Note that Cypress supports cross-browser tests from `4.0.0`, `@vue/cli-plugin-e2e-cypress` is currently using `3.8.3`, the intention is to upgrade when supported by Vue.
+* `yarn lint` - lints and fixes, using the "Standard JavaScript" rules.
 
-### Lints and fixes files
-```
-yarn lint
-```
+## Project Status
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The project uses a [simple Kanban board](https://github.com/jimCresswell/trees-from-seed/projects/1). I'm currently building the data handling capabilities, UI is next.
+
+## Customising the Build
+
+If you want to change the build configuration see the [Configuration Reference](https://cli.vuejs.org/config/).
