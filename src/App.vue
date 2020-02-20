@@ -45,7 +45,6 @@
         </template>
       </div>
       <router-view/>
-      <!-- <HelloWorld/> -->
     </v-content>
   </v-app>
 </template>
@@ -70,15 +69,10 @@
 </style>
 
 <script>
-// import HelloWorld from './components/HelloWorld'
 import { routes } from './router'
 
 export default {
   name: 'App',
-
-  // components: {
-  //   HelloWorld
-  // },
 
   // Note: this is data local to the App component.
   // The Vuex store has also been injected in `main.js` and is available to all child components.
