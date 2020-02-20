@@ -1,5 +1,8 @@
 <template>
-  <span>Species: {{ tree.species }}. Name: {{ tree.name }}</span>
+  <v-btn
+    link
+    :href="tree.wikiLink"
+  >More on Wikipedia</v-btn>
 </template>
 
 <script>

@@ -1,24 +1,16 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="trees-from-seed">
     <v-navigation-drawer
       v-model="drawer"
       app
     >
-      <v-list dense>
-        <v-list-item link>
+      <v-list v-for="(route, i) in mainRoutes" :key=i nav>
+        <v-list-item :to="route.path" link>
           <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
+            <v-icon :color="route.icon.colour">mdi-{{route.icon.name}}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-contact-mail</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Contact</v-list-item-title>
+            <v-list-item-title>{{route.name}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -26,11 +18,11 @@
 
     <v-app-bar
       app
-      color="indigo"
+      color="primary"
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Trees from Seed</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
@@ -38,49 +30,24 @@
         class="fill-height"
         fluid
       >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col class="text-center">
-            <v-tooltip left>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="blah"
-                  icon
-                  large
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-code-tags</v-icon>
-                </v-btn>
-              </template>
-              <span>Source</span>
-            </v-tooltip>
-
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  large
-                  href="https://codepen.io/johnjleider/pen/zgxeLQ"
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-codepen</v-icon>
-                </v-btn>
-              </template>
-              <span>Codepen</span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
+       <router-view></router-view>
       </v-container>
     </v-content>
     <v-footer
-      color="indigo"
       app
+      inset
+      color="primary"
+      dark
     >
-      <span class="white--text">&copy; 2019</span>
+      <v-btn
+        link
+        large
+        outlined
+        href="https://github.com/jimCresswell/trees-from-seed"
+        target="_blank"
+      >
+        <v-icon>mdi-github-circle</v-icon><span class="ml-2">Source code on GitHub</span>
+      </v-btn>
     </v-footer>
   </v-app>
 </template>
