@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 import _cloneDeep from 'lodash.clonedeep'
 
-import OldHome from '../views/OldHome.vue'
 import TreesView from '../views/TreesView.vue'
 
 Vue.use(VueRouter)
@@ -29,15 +28,6 @@ const routes = [
     icon: {
       name: 'information-outline',
       colour: 'orange'
-    },
-    isMainRoute: true
-  },
-  {
-    path: '/oldhome',
-    name: 'OldHome',
-    component: OldHome,
-    icon: {
-      name: 'home'
     },
     isMainRoute: true
   }
