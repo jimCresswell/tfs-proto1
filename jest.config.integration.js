@@ -1,5 +1,5 @@
 /**
- * Integration tests for Vue components and plugin congfigurations,
+ * Integration tests for Vue components and plugin configurations,
  * e.g. the Vue components that require rendering in a virtual DOM.
  *
  * These tests are slower than the non-Vue unit tests.
