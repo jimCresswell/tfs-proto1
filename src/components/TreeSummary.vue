@@ -1,7 +1,7 @@
 <template>
   <v-btn
     link
-    :href="tree.wikiLink"
+    :href="tree.wikipedia.link"
   >More on Wikipedia</v-btn>
 </template>
 

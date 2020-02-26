@@ -1,14 +1,5 @@
-import validateData from '../helpers/schema'
-
-const dataSchema = {
-  species: '',
-  name: '',
-  wikiLink: '',
-  wikiData: {},
-  otherNames: [],
-  seedContainer: '',
-  collect: { start: '', finish: '' }
-}
+import validateData from '../helpers/validate_data'
+import treeSchema from './tree_schema'
 
 /**
  * Container class for tree data, with argument checking.
@@ -17,7 +8,7 @@ const dataSchema = {
  */
 class Tree {
   constructor (options) {
-    validateData(options, dataSchema)
+    validateData(options, treeSchema)
     Object.assign(this, options)
   }
 }

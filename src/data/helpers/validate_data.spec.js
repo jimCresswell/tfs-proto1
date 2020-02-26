@@ -1,4 +1,4 @@
-import validateData from './schema'
+import validateData from './validate_data'
 import _cloneDeep from 'lodash.clonedeep'
 
 const schema = {
