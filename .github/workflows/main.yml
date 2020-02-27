@@ -20,7 +20,6 @@ jobs:
     - name: Install
       uses: cypress-io/github-action@v1
       with:
-        # Just do the install with caching.
         runTests: false
     - name: Code tests
       run: yarn test:code
@@ -29,7 +28,6 @@ jobs:
     - name: E2E Cypress tests
       uses: cypress-io/github-action@v1
       with:
-        # Already installed
         install: false
         start: yarn serve
         wait-on: http://localhost:8080/
