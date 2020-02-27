@@ -17,9 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn --frozen-lockfile
+      run: yarn --frozen-lockfile
     - name: Code tests
-    - run: yarn test:code
+      run: yarn test:code
     - name: E2E Cypress tests
       uses: cypress-io/github-action@v1
       with:
