@@ -18,7 +18,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install
-      run: yarn --frozen-lockfile
+      uses: cypress-io/github-action@v1
+      with:
+        # Just do the install with caching.
+        runTests: false
     - name: Code tests
       run: yarn test:code
       env:
@@ -26,6 +29,8 @@ jobs:
     - name: E2E Cypress tests
       uses: cypress-io/github-action@v1
       with:
+        # Already installed
+        install: false
         start: yarn serve
         wait-on: http://localhost:8080/
         config_file: cypress.json
