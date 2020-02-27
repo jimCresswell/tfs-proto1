@@ -1,5 +1,7 @@
 # trees-from-seed
 
+![Trees from Seed CI](https://github.com/jimCresswell/trees-from-seed/workflows/Trees%20from%20Seed%20CI/badge.svg)
+
 A client-side web app providing information and guidance on growing native and naturalised trees (UK/northern Europe) from seed. The information should be applicable in any temperate zone although obviously native species will vary.
 
 ## Technology
@@ -8,7 +10,7 @@ This is a [Vue](https://vuejs.org/) client-side web app, using Vuex for (flux-li
 
 ## Data
 
-The initial data is specified in individual tree files e.g. the [common oak](src\data\trees\quercus_robur.js), the data is passed to an encapsulating [`Tree` class](src\data\trees\tree.js) and compared to a schema with [key and value-type checking](src\data\helpers\schema.js).
+The initial data is specified in individual tree files e.g. the [common oak](./src/data/trees/quercus_robur.js), the data is passed to an encapsulating [`Tree` class](./src/data/trees/tree.js) and compared to a schema with [key and value-type checking](./src/data/helpers/validate_data.js).
 
 Additional data and CC licence images will be downloaded client-side from the [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/#/).
 
@@ -26,7 +28,13 @@ Additional data and CC licence images will be downloaded client-side from the [W
 
 ## Project Status
 
-The project uses a [simple Kanban board](https://github.com/jimCresswell/trees-from-seed/projects/1). I'm currently building the data handling capabilities, UI is next.
+The project uses a [simple Kanban board](https://github.com/jimCresswell/trees-from-seed/projects/1).
+
+## Continuous Integration and Delivery
+
+Both code and end-to-end tests are run automatically on push using GitHub actions. The configuration is [here](./.github/workflows/main.yml) and the results are [here](https://github.com/jimCresswell/trees-from-seed/actions).
+
+Pull requests are blocked on all tests passing and the source branch being up to date with `master`.
 
 ## Customising the Build
 
