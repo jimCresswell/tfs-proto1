@@ -20,6 +20,8 @@ jobs:
       run: yarn --frozen-lockfile
     - name: Code tests
       run: yarn test:code
+      env:
+        CI: true
     - name: E2E Cypress tests
       uses: cypress-io/github-action@v1
       with:
