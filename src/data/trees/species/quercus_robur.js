@@ -1,4 +1,4 @@
-import Tree, { constants } from './tree'
+import Tree, { constants } from '../tree'
 const { months, seedContainers } = constants
 
 export default new Tree({
