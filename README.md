@@ -1,6 +1,6 @@
 # trees-from-seed
 
-![Trees from Seed CI](https://github.com/jimCresswell/trees-from-seed/workflows/Trees%20from%20Seed%20CI/badge.svg)
+![Trees from Seed CI ](https://github.com/jimCresswell/trees-from-seed/workflows/Trees%20from%20Seed%20CI/badge.svg)
 
 A client-side web app providing information and guidance on growing native and naturalised trees (UK/northern Europe) from seed. The information should be applicable in any temperate zone although obviously native species will vary.
 
