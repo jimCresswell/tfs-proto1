@@ -1,5 +1,5 @@
 import Tree, { constants } from '../tree'
-const { months, seedContainers } = constants
+const { months, seedContainers, edibility } = constants
 
 export default new Tree({
   species: 'Quercus petraea',
@@ -15,6 +15,7 @@ export default new Tree({
     'other oaks'
   ],
   seedContainer: seedContainers.NUT,
+  edible: edibility.SORT_OF,
   // All dimensions are in meters and approximate.
   // Dimensions must contain height, may contain width.
   dimensions: {
@@ -32,6 +33,8 @@ export default new Tree({
     Gently separate the acorns from their cups, then float the acorns in some water. Discard any that float, they don't have a viable seed inside.
     Sow your acorns straight away, they aren't dormant and if they dry out they will die. Sow about 10cm down (about as deep as a squirrel digs).
     Roots will grow over winter and shoots should appear by mid-spring.`,
+    edibility: `People have traditionally made flour from acorns and they have other [uses as food](https://en.wikipedia.org/wiki/Acorn#As_food). However, acorns contain bitter tasting chemicals called [tannins](https://en.wikipedia.org/wiki/Tannin) (named for their use in tanning leather) which help the trees fight off predators, and which require proper treatment to remove (usually soaking in cold water).
+    As with all lesser known foods they may cause unexpected adverse reactions so take appropriate precautions.`,
     supports: `Sessile oaks support over 500 species of invertebrates, and many birds, bats, other mammals, mosses and lichens, as well as an incredible host of microorganisms including [mycorrhizal fungi](https://en.wikipedia.org/wiki/Mycorrhizal_network) which allow plants to communicate and share resources through their roots and sink extra carbon into the ground.
     The [pied flycatcher](https://en.wikipedia.org/wiki/European_pied_flycatcher) uses sessile oaks as a nesting site.
     Oaks are an incredibly important source of food and shelter for many British species.`

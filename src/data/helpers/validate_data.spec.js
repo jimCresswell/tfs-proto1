@@ -21,58 +21,70 @@ const goodData = {
   }
 }
 
-describe('The validateData function', () => {
-  it('allows data matching the schema', () => {
-    expect(
-      () => validateData(goodData, schema)
-    ).not.toThrow()
+describe('The Validate Data module', () => {
+  describe('validateData function', () => {
+    it('allows data matching the schema', () => {
+      expect(
+        () => validateData(goodData, schema)
+      ).not.toThrow()
+    })
+
+    it('allows additional properties in the data', () => {
+      const data = _cloneDeep(goodData, schema)
+      data.anExtraProperty = 'lovely'
+
+      expect(
+        () => validateData(data)
+      ).not.toThrow()
+    })
+
+    it('throws on properties missing from the schema', () => {
+      const data = _cloneDeep(goodData)
+      delete data.name
+
+      expect(
+        () => validateData(data, schema)
+      ).toThrow(/Schema error: Required property (.+) is undefined/)
+    })
+
+    it('throws on properties not matching the type in the schema', () => {
+      const data = _cloneDeep(goodData)
+      data.name = ['unexpected array']
+
+      expect(
+        () => validateData(data, schema)
+      ).toThrow(/Schema error: Expected property (.+) to have type/)
+    })
+
+    it('accumulates errors and throws once', () => {
+      const data = _cloneDeep(goodData)
+      // Error 1.
+      data.name = ['unexpected array']
+      // Error 2.
+      delete data.otherNames
+
+      expect(
+        () => validateData(data, schema)
+      ).toThrow(/Schema errors:\n/)
+    })
+
+    it('checks the schema recursively and includes the property path in the error message', () => {
+      const data = _cloneDeep(goodData)
+      delete data.collect.start
+
+      expect(
+        () => validateData(data, schema)
+      ).toThrow(/collect.start/)
+    })
+
+    it('supports optional values with type checks')
+    it('supports lists of allowed values ')
   })
 
-  it('allows additional properties in the data', () => {
-    const data = _cloneDeep(goodData, schema)
-    data.anExtraProperty = 'lovely'
-
-    expect(
-      () => validateData(data)
-    ).not.toThrow()
-  })
-
-  it('throws on properties missing from the schema', () => {
-    const data = _cloneDeep(goodData)
-    delete data.name
-
-    expect(
-      () => validateData(data, schema)
-    ).toThrow(/Schema error: Required property (.+) is undefined/)
-  })
-
-  it('throws on properties not matching the type in the schema', () => {
-    const data = _cloneDeep(goodData)
-    data.name = ['unexpected array']
-
-    expect(
-      () => validateData(data, schema)
-    ).toThrow(/Schema error: Expected property (.+) to have type/)
-  })
-
-  it('accumulates errors and throws once', () => {
-    const data = _cloneDeep(goodData)
-    // Error 1.
-    data.name = ['unexpected array']
-    // Error 2.
-    delete data.otherNames
-
-    expect(
-      () => validateData(data, schema)
-    ).toThrow(/Schema errors:\n/)
-  })
-
-  it('Checks the schema recursively and includes the property path in the error message', () => {
-    const data = _cloneDeep(goodData)
-    delete data.collect.start
-
-    expect(
-      () => validateData(data, schema)
-    ).toThrow(/collect.start/)
+  describe('defineValue function', () => {
+    it('throws without an options object argument')
+    it('throws on an improper options object argument')
+    it('enables optional values to be defined')
+    it('enables lists of allowed values to be defined')
   })
 })

@@ -1,3 +1,5 @@
+import _cloneDeep from 'lodash.clonedeep'
+
 /**
  * typeof with 'array'
  *
@@ -35,13 +37,15 @@ function _checkParams (schema, data, path = '') {
     if (dataValue === undefined) {
       paramErrors.push(`Required property '${pathToProp}' is undefined.`)
 
+    /** @todo allow type mismatch if schema object is schema value definition */
     // Error: the data should contain a value of the correct type.
     } else if (schemaPropType !== dataPropType) {
       paramErrors.push(`Expected property '${pathToProp}' to have type '${schemaPropType}', received value '${data[schemaProp]}' with type '${dataPropType}'.`)
 
     // Success.
     } else {
-      // If the schema property is an object then recursivey check that part of the schema.
+    /** @todo don't do this if schema object is schema value definition */
+      // If the schema property is an object then recursive check that part of the schema.
       if (schemaPropType === 'object') {
         const subPath = `${pathToProp}.`
         const subErrors = _checkParams(schemaValue, dataValue, subPath)
@@ -82,4 +86,35 @@ function validateData (data, schema) {
   }
 }
 
+/**
+ * Create a schema value definition from an options object.
+ * Allows more fine-grained control than specifying e.g. `treeDescription: ''`.
+ *
+ * Currently used to mark values as optional but still allow type testing
+ * if they are present, and to set allowed values.
+ *
+ * @param {object} options Collection of options including `type` and `optional`
+ * @returns A data value schema definition object.
+ */
+function defineValue (options) {
+  if (typeof options !== 'object') {
+    throw new TypeError(`Expected an options object, received: ${options}`)
+  }
+  if (options.type === undefined) {
+    throw new TypeError('Please provide an example type for the value being defined. E.g. \'\', [], or {}')
+  }
+  const allowedValues = options.allowedValues
+  if (allowedValues !== undefined && !Array.isArray(allowedValues)) {
+    throw new TypeError(`Expected an array of allowed values, received ${allowedValues}`)
+  }
+
+  return {
+    __schemaDefinition__: true,
+    optional: Boolean(options.optional),
+    type: _cloneDeep(options.type),
+    allowedValues: _cloneDeep(allowedValues)
+  }
+}
+
 export default validateData
+export { defineValue }
