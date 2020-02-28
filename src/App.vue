@@ -50,6 +50,7 @@
         <v-icon>mdi-github-circle</v-icon>
         <span class="ml-2">Source code on GitHub</span>
       </v-btn>
+      <p class="food_warning">Don't eat anything unless you are sure it is safe for you.</p>
     </v-footer>
   </v-app>
 </template>
