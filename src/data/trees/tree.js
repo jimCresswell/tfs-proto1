@@ -7,9 +7,9 @@ import treeSchema, { constants } from './tree_schema'
  * @class Tree
  */
 class Tree {
-  constructor (options) {
-    validateData(options, treeSchema)
-    Object.assign(this, options)
+  constructor (treeData) {
+    validateData(treeSchema, treeData)
+    Object.assign(this, treeData)
   }
 }
 

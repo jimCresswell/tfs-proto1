@@ -70,11 +70,18 @@ function _toErrorString (paramErrors) {
  * Check an object against a schema, throw if props or types in the schema are not followed.
  * The data object can contain additional props not in the schema.
  *
- * @param {Object} data The data to be checked against the schema
  * @param {Object} schema The schema
+ * @param {Object} data The data to be checked against the schema
  * @throws {TypeError} A TypeError if the schema is not followed.
  */
-function validateData (data, schema) {
+function validateData (schema, data) {
+  if (typeof schema !== 'object') {
+    throw new TypeError(`Expected schema definition object, received ${schema}`)
+  }
+  if (typeof data !== 'object') {
+    throw new TypeError(`Expected data object, received ${data}`)
+  }
+
   const paramErrors = _checkParams(schema, data)
 
   // If schema errors were found then throw.
@@ -108,12 +115,14 @@ function defineValue (options) {
     throw new TypeError(`Expected an array of allowed values, received ${allowedValues}`)
   }
 
-  return {
+  const valueDefinition = {
     __schemaDefinition__: true,
     optional: Boolean(options.optional),
-    type: _cloneDeep(options.type),
+    type: options.type,
     allowedValues: _cloneDeep(allowedValues)
   }
+
+  return valueDefinition
 }
 
 export default validateData

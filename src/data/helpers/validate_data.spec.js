@@ -25,16 +25,16 @@ describe('The Validate Data module', () => {
   describe('validateData function', () => {
     it('allows data matching the schema', () => {
       expect(
-        () => validateData(goodData, schema)
+        () => validateData(schema, goodData)
       ).not.toThrow()
     })
 
     it('allows additional properties in the data', () => {
-      const data = _cloneDeep(goodData, schema)
+      const data = _cloneDeep(goodData)
       data.anExtraProperty = 'lovely'
 
       expect(
-        () => validateData(data)
+        () => validateData(schema, data)
       ).not.toThrow()
     })
 
@@ -43,7 +43,7 @@ describe('The Validate Data module', () => {
       delete data.name
 
       expect(
-        () => validateData(data, schema)
+        () => validateData(schema, data)
       ).toThrow(/Schema error: Required property (.+) is undefined/)
     })
 
@@ -52,7 +52,7 @@ describe('The Validate Data module', () => {
       data.name = ['unexpected array']
 
       expect(
-        () => validateData(data, schema)
+        () => validateData(schema, data)
       ).toThrow(/Schema error: Expected property (.+) to have type/)
     })
 
@@ -64,7 +64,7 @@ describe('The Validate Data module', () => {
       delete data.otherNames
 
       expect(
-        () => validateData(data, schema)
+        () => validateData(schema, data)
       ).toThrow(/Schema errors:\n/)
     })
 
@@ -73,18 +73,18 @@ describe('The Validate Data module', () => {
       delete data.collect.start
 
       expect(
-        () => validateData(data, schema)
+        () => validateData(schema, data)
       ).toThrow(/collect.start/)
     })
 
-    it('supports optional values with type checks')
-    it('supports lists of allowed values ')
+    test.todo('supports optional values with type checks')
+    test.todo('supports lists of allowed values ')
   })
 
   describe('defineValue function', () => {
-    it('throws without an options object argument')
-    it('throws on an improper options object argument')
-    it('enables optional values to be defined')
-    it('enables lists of allowed values to be defined')
+    test.todo('throws without an options object argument')
+    test.todo('throws on an improper options object argument')
+    test.todo('enables optional values to be defined')
+    test.todo('enables lists of allowed values to be defined')
   })
 })
