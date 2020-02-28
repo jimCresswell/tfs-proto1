@@ -2,7 +2,7 @@
  * The data structure schema for data passed to the Tree class at instantiation.
  */
 
-import defineValue from '../helpers/validate_data'
+import { defineValue } from '../helpers/validate_data'
 
 /*
   Constants used in defining the tree data.
@@ -58,7 +58,7 @@ const treeSchema = {
   name: '',
   otherNames: [],
   confusedWith: [],
-  edibility: defineValue({
+  edible: defineValue({
     type: '',
     optional: false,
     allowedValues: [edibility.YES, edibility.NO, edibility.SORT_OF]
