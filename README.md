@@ -16,15 +16,26 @@ Additional data and CC licence images will be downloaded client-side from the [W
 
 ## Scripts
 
-* `yarn install`.
-* `yarn serve` - dev serve with hot reload.
-* `yarn build`- production compilation with minification.
-* Test
-  * `yarn test:unit` - unit tests (Jest) that don't depend on Vue.
-  * `yarn test:int` - unit-like tests (Jest) that do depend on Vue or Vue plugins.
-  * `yarn test:code` - equivalent to `unit` and `int` tests.
-  * `yarn test:e2e` - end-to-end web GUI tests using Cypress. Note that Cypress supports cross-browser tests from `4.0.0`, `@vue/cli-plugin-e2e-cypress` is currently using `3.8.3`, the intention is to upgrade when supported by Vue.
-* `yarn lint` - lints and fixes, using the "Standard JavaScript" rules.
+### Build and Development
+
+| Script | Description           |
+| :------------- |:-------------|
+| <code>yarn&nbsp;install</code> | Install dependencies |
+| <code>yarn&nbsp;serve</code>      | Dev serve with hot reload      |
+| <code>yarn&nbsp;build</code> | Production compilation with minification |
+
+### Checks
+
+Note, all the Jest commands take a `--watch` option.
+
+| Script | Description           |
+| :------------- |:-------------|
+| <code>yarn&nbsp;test:code</code> | All the Jest tests, equivalent to `unit` + `int` + `vueint` + any Jest tests not following the naming scheme (there shouldn't be any of those) |
+| <code>yarn&nbsp;test:unit</code> | unit tests (Jest) that don't depend on Vue |
+| <code>yarn&nbsp;test:int</code> | integration tests (Jest) that don't depend on Vue |
+| <code>yarn&nbsp;test:vueint</code> | integration tests (Jest) that do depend on Vue or Vue plugins |
+| <code>yarn&nbsp;test:e2e</code> | end-to-end web GUI tests using Cypress. Note that Cypress supports cross-browser tests from `4.0.0`, `@vue/cli-plugin-e2e-cypress` is currently using `3.8.3`, the intention is to upgrade when supported by Vue |
+| <code>yarn&nbsp;lint</code> | lints and fixes, using the "Standard JavaScript" rules |
 
 ## Project Status
 
