@@ -98,10 +98,18 @@ function validateData (schema, data) {
  * Allows more fine-grained control than specifying e.g. `treeDescription: ''`.
  *
  * Currently used to mark values as optional but still allow type testing
- * if they are present, and to set allowed values.
+ * if they are present, and to set lists allowed values.
  *
- * @param {object} options Collection of options including `type` and `optional`
- * @returns A data value schema definition object.
+ * @param {object} options Collection of options describing the value
+ * @param {*} options.type An example type for the value, e.g. `''`, `true`, `1`, `[]`, `{}`
+ * @param {boolean} [options.optional] An (optional) boolean describing whether the value is optional, default false.
+ * @param {Array} [options.allowedValues] An (optional) array of allowed values for the value.
+ * @returns {{
+    __schemaDefinition__: true,
+    optional: boolean,
+    type: any,
+    allowedValues: Array
+  }} A data value schema definition object.
  */
 function defineValue (options) {
   if (typeof options !== 'object') {
@@ -112,14 +120,14 @@ function defineValue (options) {
   }
   const allowedValues = options.allowedValues
   if (allowedValues !== undefined && !Array.isArray(allowedValues)) {
-    throw new TypeError(`Expected an array of allowed values, received ${allowedValues}`)
+    throw new TypeError(`Expected an array of allowed values, received: ${allowedValues}`)
   }
 
   const valueDefinition = {
     __schemaDefinition__: true,
-    optional: Boolean(options.optional),
     type: options.type,
-    allowedValues: _cloneDeep(allowedValues)
+    optional: Boolean(options.optional),
+    allowedValues: _cloneDeep(allowedValues) || undefined
   }
 
   return valueDefinition
