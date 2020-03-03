@@ -10,8 +10,8 @@ const schema = {
     start: '',
     finish: ''
   },
-  optionalValue: defineValue({ type: 1, optional: true }),
-  constrainedValue: defineValue({ type: '', allowedValues: ['allowed1', 'allowed2'] })
+  optionalValue: defineValue({ example: 1, optional: true }),
+  constrainedValue: defineValue({ example: '', allowedValues: ['allowed1', 'allowed2'] })
 }
 
 const goodData = {
@@ -25,6 +25,7 @@ const goodData = {
     start: 'month 1',
     finish: 'month 2'
   },
+  optionalValue: 888,
   constrainedValue: 'allowed1'
 }
 
@@ -36,7 +37,7 @@ describe('The Validate Data module', () => {
       ).toThrow(/Expected an options object/)
     })
 
-    it('throws if options.type is missing', () => {
+    it('throws if options.example is missing', () => {
       expect(
         () => { defineValue({}) }
       ).toThrow(/Please provide an example type/)
@@ -44,18 +45,18 @@ describe('The Validate Data module', () => {
 
     it('throws if options.allowedValues is not an Array', () => {
       expect(
-        () => { defineValue({ type: '', allowedValues: 123 }) }
+        () => { defineValue({ example: '', allowedValues: 123 }) }
       ).toThrow(/Expected an array of allowed values/)
     })
 
     it('enables optional values to be defined', () => {
-      const schemaValue = defineValue({ type: 1, optional: true })
+      const schemaValue = defineValue({ example: 1, optional: true })
       expect(schemaValue.optional).toBe(true)
     })
 
     it('enables lists of allowed values to be defined', () => {
       const av = [1, 2, 3]
-      const schemaValue = defineValue({ type: 1, allowedValues: av })
+      const schemaValue = defineValue({ example: 1, allowedValues: av })
       expect(schemaValue.allowedValues).toEqual(av)
     })
   })
@@ -115,9 +116,9 @@ describe('The Validate Data module', () => {
       ).toThrow(/collect.start/)
     })
 
-    it('supports optional values', () => {
+    it('allows optional values to be missing', () => {
       const data = _cloneDeep(goodData)
-      data.optionalValue = 333
+      delete data.optionalValue
 
       expect(
         () => validateData(schema, data)
@@ -130,7 +131,7 @@ describe('The Validate Data module', () => {
 
       expect(
         () => validateData(schema, data)
-      ).toThrow(/type checking on optional value/)
+      ).toThrow(/Schema error: Expected property .* to have type .*/)
     })
 
     it('checks values against the allowedValues list', () => {
@@ -139,7 +140,7 @@ describe('The Validate Data module', () => {
 
       expect(
         () => validateData(schema, data)
-      ).toThrow(/checking against allowed list/)
+      ).toThrow(/Expected value to be one of/)
     })
   })
 })
