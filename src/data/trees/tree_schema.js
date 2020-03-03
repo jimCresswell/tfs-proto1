@@ -59,7 +59,7 @@ const treeSchema = {
   otherNames: [],
   confusedWith: [],
   edible: defineValue({
-    type: '',
+    example: '',
     optional: false,
     allowedValues: [edibility.YES, edibility.NO, edibility.SORT_OF]
   }),
@@ -77,7 +77,7 @@ const treeSchema = {
     didYouKnow: '',
     general: '',
     seedGathering: '',
-    edibility: defineValue({ type: '', optional: true }),
+    edibility: defineValue({ example: '', optional: true }),
     supports: ''
   },
   // Date ranges are inclusive:
