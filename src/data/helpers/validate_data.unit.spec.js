@@ -1,33 +1,6 @@
 import validateData, { defineValue } from './validate_data'
-import _cloneDeep from 'lodash.clonedeep'
 
-const schema = {
-  name: '',
-  otherNames: [],
-  age: 1,
-  happy: true,
-  collect: {
-    start: '',
-    finish: ''
-  },
-  optionalValue: defineValue({ example: 1, optional: true }),
-  constrainedValue: defineValue({ example: '', allowedValues: ['allowed1', 'allowed2'] })
-}
-
-const goodData = {
-  name: 'Fred',
-  otherNames: [
-    'Henrietta'
-  ],
-  age: 900,
-  happy: true,
-  collect: {
-    start: 'month 1',
-    finish: 'month 2'
-  },
-  optionalValue: 888,
-  constrainedValue: 'allowed1'
-}
+let schema, goodData
 
 describe('The Validate Data module', () => {
   describe('defineValue function', () => {
@@ -62,6 +35,36 @@ describe('The Validate Data module', () => {
   })
 
   describe('validateData function', () => {
+    beforeEach(() => {
+      schema = {
+        name: '',
+        otherNames: [],
+        age: 1,
+        happy: true,
+        collect: {
+          start: '',
+          finish: ''
+        },
+        optionalValue: defineValue({ example: 1, optional: true }),
+        constrainedValue: defineValue({ example: '', allowedValues: ['allowed1', 'allowed2'] })
+      }
+
+      goodData = {
+        name: 'Fred',
+        otherNames: [
+          'Henrietta'
+        ],
+        age: 900,
+        happy: true,
+        collect: {
+          start: 'month 1',
+          finish: 'month 2'
+        },
+        optionalValue: 888,
+        constrainedValue: 'allowed1'
+      }
+    })
+
     it('allows data matching the schema', () => {
       expect(
         () => validateData(schema, goodData)
@@ -69,77 +72,75 @@ describe('The Validate Data module', () => {
     })
 
     it('allows additional properties in the data', () => {
-      const data = _cloneDeep(goodData)
-      data.anExtraProperty = 'lovely'
+      goodData.anExtraProperty = 'lovely'
 
       expect(
-        () => validateData(schema, data)
+        () => validateData(schema, goodData)
       ).not.toThrow()
     })
 
     it('throws on properties missing from the schema', () => {
-      const data = _cloneDeep(goodData)
-      delete data.name
+      const badData = goodData
+      delete badData.name
 
       expect(
-        () => validateData(schema, data)
+        () => validateData(schema, badData)
       ).toThrow(/Schema error: Required property (.+) is undefined/)
     })
 
     it('throws on properties not matching the type in the schema', () => {
-      const data = _cloneDeep(goodData)
-      data.name = ['unexpected array']
+      const badData = goodData
+      badData.name = ['unexpected array']
 
       expect(
-        () => validateData(schema, data)
+        () => validateData(schema, badData)
       ).toThrow(/Schema error: Expected property (.+) to have type/)
     })
 
     it('accumulates errors and throws once', () => {
-      const data = _cloneDeep(goodData)
+      const badData = goodData
       // Error 1.
-      data.name = ['unexpected array']
+      badData.name = ['unexpected array']
       // Error 2.
-      delete data.otherNames
+      delete badData.otherNames
 
       expect(
-        () => validateData(schema, data)
+        () => validateData(schema, badData)
       ).toThrow(/Schema errors:\n/)
     })
 
     it('checks the schema recursively and includes the property path in the error message', () => {
-      const data = _cloneDeep(goodData)
-      delete data.collect.start
+      const badData = goodData
+      delete badData.collect.start
 
       expect(
-        () => validateData(schema, data)
+        () => validateData(schema, badData)
       ).toThrow(/collect.start/)
     })
 
     it('allows optional values to be missing', () => {
-      const data = _cloneDeep(goodData)
-      delete data.optionalValue
+      delete goodData.optionalValue
 
       expect(
-        () => validateData(schema, data)
+        () => validateData(schema, goodData)
       ).not.toThrow()
     })
 
     it('supports type checking on optional values', () => {
-      const data = _cloneDeep(goodData)
-      data.optionalValue = 'unexpected string'
+      const badData = goodData
+      badData.optionalValue = 'unexpected string'
 
       expect(
-        () => validateData(schema, data)
+        () => validateData(schema, badData)
       ).toThrow(/Schema error: Expected property .* to have type .*/)
     })
 
     it('checks values against the allowedValues list', () => {
-      const data = _cloneDeep(goodData)
-      data.constrainedValue = 'another unexpected string'
+      const badData = goodData
+      badData.constrainedValue = 'another unexpected string'
 
       expect(
-        () => validateData(schema, data)
+        () => validateData(schema, badData)
       ).toThrow(/Expected value to be one of/)
     })
   })
