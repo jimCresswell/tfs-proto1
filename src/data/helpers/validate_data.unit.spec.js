@@ -57,11 +57,11 @@ describe('The Validate Data module', () => {
         age: 900,
         happy: true,
         collect: {
-          start: 'month 1',
+          start: `month ${0 + 1}`,
           finish: 'month 2'
         },
         optionalValue: 888,
-        constrainedValue: 'allowed1'
+        constrainedValue: `allowed${1}`
       }
     })
 
