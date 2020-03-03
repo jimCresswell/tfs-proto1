@@ -1,9 +1,68 @@
+/**
+ * The data structure schema for data passed to the Tree class at instantiation.
+ */
+
+import { defineValue } from '../helpers/validate_data'
+
+/*
+  Constants used in defining the tree data.
+*/
+
+const edibility = {
+  YES: 'yes',
+  NO: 'no',
+  SORT_OF: 'sort of'
+}
+
+const seedContainers = {
+  NUT: 'nut',
+  FRUIT: 'fruit',
+  WING: 'wing',
+  CONE: 'cone'
+}
+
+const months = {
+  JANUARY: 'January',
+  MIDJANUARY: 'mid-January',
+  FEBRUARY: 'February',
+  MIDFEBRUARY: 'mid-February',
+  MARCH: 'March',
+  MIDMARCH: 'mid-March',
+  APRIL: 'April',
+  MIDAPRIL: 'mid-April',
+  MAY: 'May',
+  MIDMAY: 'mid-May',
+  JUNE: 'June',
+  MIDJUNE: 'mid-June',
+  JULY: 'July',
+  MIDJULY: 'mid-July',
+  AUGUST: 'August',
+  MIDAUGUST: 'mid-August',
+  SEPTEMBER: 'September',
+  MIDSEPTEMBER: 'mid-September',
+  OCTOBER: 'October',
+  MIDOCTOBER: 'mid-October',
+  NOVEMBER: 'November',
+  MIDNOVEMBER: 'mid-November',
+  DECEMBER: 'December',
+  MIDDECEMBER: 'mid-December'
+}
+
+/*
+  The schema.
+*/
+
 const treeSchema = {
   species: '',
   family: '',
   name: '',
   otherNames: [],
   confusedWith: [],
+  edible: defineValue({
+    example: '',
+    optional: false,
+    allowedValues: [edibility.YES, edibility.NO, edibility.SORT_OF]
+  }),
   seedContainer: '',
   // All dimensions are in meters and approximate.
   // Dimensions must contain height, may contain width.
@@ -18,6 +77,7 @@ const treeSchema = {
     didYouKnow: '',
     general: '',
     seedGathering: '',
+    edibility: defineValue({ example: '', optional: true }),
     supports: ''
   },
   // Date ranges are inclusive:
@@ -49,3 +109,8 @@ const treeSchema = {
 }
 
 export default treeSchema
+export const constants = {
+  edibility,
+  seedContainers,
+  months
+}

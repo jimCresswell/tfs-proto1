@@ -40,16 +40,32 @@
       color="primary"
       dark
     >
-      <v-btn
-        link
-        large
-        outlined
-        href="https://github.com/jimCresswell/trees-from-seed"
-        target="_blank"
+      <v-card
+        flat
+        tile
+        width="100%"
+        color="primary"
+        class="text-center"
       >
-        <v-icon>mdi-github-circle</v-icon>
-        <span class="ml-2">Source code on GitHub</span>
-      </v-btn>
+        <v-card-text>
+          <v-btn
+            link
+            large
+            outlined
+            href="https://github.com/jimCresswell/trees-from-seed"
+            target="_blank"
+          >
+            <v-icon>mdi-github-circle</v-icon>
+            <span class="ml-2">Source code on GitHub</span>
+          </v-btn>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text">
+          Don't eat anything unless you are sure it is safe for you.
+        </v-card-text>
+      </v-card>
     </v-footer>
   </v-app>
 </template>
