@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import _cloneDeep from 'lodash.clonedeep'
 
 import TreesView from '../views/TreesView.vue'
+import TreeDetails from '../views/TreeDetails.vue'
 import FourOhFour from '../views/FourOhFour.vue'
 
 Vue.use(VueRouter)
@@ -11,6 +12,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    alias: '/trees',
     name: 'Trees',
     component: TreesView,
     inMainNav: true,
@@ -31,6 +33,12 @@ const routes = [
       name: 'information-outline',
       colour: 'orange'
     }
+  },
+  {
+    path: '/trees/:species',
+    name: 'TreeDetails',
+    component: TreeDetails,
+    inMainNav: false
   },
   {
     path: '*',
