@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import _cloneDeep from 'lodash.clonedeep'
 
 import TreesView from '../views/TreesView.vue'
+import FourOhFour from '../views/FourOhFour.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,12 @@ const routes = [
       name: 'information-outline',
       colour: 'orange'
     }
+  },
+  {
+    path: '*',
+    name: '404',
+    component: FourOhFour,
+    inMainNav: false
   }
 ]
 
