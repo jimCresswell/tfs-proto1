@@ -12,11 +12,11 @@ const routes = [
     path: '/',
     name: 'Trees',
     component: TreesView,
+    inMainNav: true,
     icon: {
       name: 'tree-outline',
       colour: 'green'
-    },
-    isMainRoute: true
+    }
   },
   {
     path: '/about',
@@ -25,11 +25,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    inMainNav: true,
     icon: {
       name: 'information-outline',
       colour: 'orange'
-    },
-    isMainRoute: true
+    }
   }
 ]
 
