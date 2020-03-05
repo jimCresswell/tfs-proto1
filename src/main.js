@@ -7,6 +7,13 @@ import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 
+Vue.filter('speciesToLink', function (speciesName) {
+  if (!speciesName) return '/something_went_wrong'
+  speciesName = speciesName.toString()
+  const speciesPath = speciesName.trim().toLowerCase().replace(/\s+/g, '_')
+  return `/trees/${speciesPath}`
+})
+
 new Vue({
   router,
   store,

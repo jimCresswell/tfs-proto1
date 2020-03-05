@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'FourOhFour',
+  name: 'FourOhFourView',
   computed: {
     attemptedRoute () {
       return this.$route.params.pathMatch
