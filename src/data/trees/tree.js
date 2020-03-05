@@ -7,8 +7,19 @@ import treeSchema, { constants } from './tree_schema'
  * @class Tree
  */
 class Tree {
-  constructor (treeData) {
-    validateData(treeSchema, treeData)
+  /**
+   * Creates an instance of Tree.
+   * @param {Object} treeData The tree data to be validated them mixed into the Tree object.
+   * @param {Boolean} [disableValidation] Disable the validation for testing purposes only.
+   * @memberof Tree
+   */
+  constructor (treeData, disableValidation = false) {
+    if (disableValidation) {
+      console.warn('Tree class instantiated without validation, for testing only.')
+    } else {
+      validateData(treeSchema, treeData)
+    }
+
     Object.assign(this, treeData)
   }
 }

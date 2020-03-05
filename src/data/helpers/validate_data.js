@@ -112,13 +112,13 @@ function validateData (schema, data) {
  * Currently used to mark values as optional but still allow type testing
  * if they are present, and to set lists allowed values.
  *
- * @param {object} options Collection of options describing the value
+ * @param {Object} options Collection of options describing the value
  * @param {*} options.example An example type for the value, e.g. `''`, `true`, `1`, `[]`, `{}`
- * @param {boolean} [options.optional] An (optional) boolean describing whether the value is optional, default false.
+ * @param {Boolean} [options.optional] An (optional) boolean describing whether the value is optional, default false.
  * @param {Array} [options.allowedValues] An (optional) array of allowed values for the value.
  * @returns {{
     __schemaDefinition__: true,
-    optional: boolean,
+    optional: Boolean,
     example: any,
     allowedValues: Array
   }} A data value schema definition object.

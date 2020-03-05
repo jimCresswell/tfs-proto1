@@ -4,19 +4,22 @@ import VueRouter from 'vue-router'
 import _cloneDeep from 'lodash.clonedeep'
 
 import TreesView from '../views/TreesView.vue'
+import TreeDetails from '../views/TreeDetails.vue'
+import FourOhFour from '../views/FourOhFour.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    alias: '/trees',
     name: 'Trees',
     component: TreesView,
+    inMainNav: true,
     icon: {
       name: 'tree-outline',
       colour: 'green'
-    },
-    isMainRoute: true
+    }
   },
   {
     path: '/about',
@@ -25,11 +28,23 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    inMainNav: true,
     icon: {
       name: 'information-outline',
       colour: 'orange'
-    },
-    isMainRoute: true
+    }
+  },
+  {
+    path: '/trees/:species',
+    name: 'TreeDetails',
+    component: TreeDetails,
+    inMainNav: false
+  },
+  {
+    path: '*',
+    name: '404',
+    component: FourOhFour,
+    inMainNav: false
   }
 ]
 

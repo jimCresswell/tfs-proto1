@@ -5,7 +5,7 @@
 import quercusRobur from './species/quercus_robur'
 import quercusPetraea from './species/quercus_petraea'
 
-export default [
+export default {
   quercusRobur,
   quercusPetraea
-]
+}

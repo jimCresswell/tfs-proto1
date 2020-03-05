@@ -85,7 +85,7 @@ export default {
   }),
   computed: {
     mainRoutes () {
-      return this.routes.filter((route) => route.isMainRoute)
+      return this.routes.filter((route) => route.inMainNav)
     }
   }
 }

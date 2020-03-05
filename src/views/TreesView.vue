@@ -11,22 +11,11 @@
       <h1>The Tree Data</h1>
     </v-row>
     <v-row
+      align="start"
       justify="center"
     >
       <v-card>
-        <v-container>
-          <v-list v-for="tree in trees" v-bind:key="tree.species">
-            <v-card>
-              <v-list-item two-line>
-                <v-list-item-content class="text-center">
-                  <v-list-item-title>{{tree.species}}</v-list-item-title>
-                  <v-list-item-subtitle>{{tree.name}}</v-list-item-subtitle>
-                  <tree-summary v-bind:tree="tree"/>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
-          </v-list>
-        </v-container>
+        <tree-summary v-for="(tree, treeId) in trees" v-bind:key="treeId" v-bind:tree="tree" class="text-center" />
       </v-card>
     </v-row>
   </v-container>
