@@ -5,14 +5,13 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 
+import filters from './filters'
+
 Vue.config.productionTip = false
 
-Vue.filter('speciesToLink', function (speciesName) {
-  if (!speciesName) return '/something_went_wrong'
-  speciesName = speciesName.toString()
-  const speciesPath = speciesName.trim().toLowerCase().replace(/\s+/g, '_')
-  return `/trees/${speciesPath}`
-})
+for (const filterName in filters) {
+  Vue.filter(filterName, filters[filterName])
+}
 
 new Vue({
   router,

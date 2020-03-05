@@ -11,8 +11,15 @@
       <tr v-for="(value, property) in dataObject" :key="property">
         <td>{{ property }}</td>
         <template v-if="typeof value !== 'object'">
-          <td>{{ value }}</td>
+          <template v-if="typeof value !== 'string'">
+            <td>{{ value }}</td>
+          </template>
+          <template v-else>
+            <!-- <td>{{ value | markdownLink | stringToParagraphs }}</td> -->
+            <td><v-container v-html="descriptionToHtml(value)"></v-container></td>
+          </template>
         </template>
+        <!-- Recursively render objects in the object. -->
         <template v-else>
           <SimpleObjectTable :dataObject="value" />
         </template>
@@ -23,8 +30,15 @@
 </template>
 
 <script>
+import filters from '../filters'
+
 export default {
   name: 'SimpleObjectTable',
-  props: ['dataObject']
+  props: ['dataObject'],
+  methods: {
+    descriptionToHtml (value) {
+      return filters.markdownLink(filters.stringToParagraphs(value))
+    }
+  }
 }
 </script>
